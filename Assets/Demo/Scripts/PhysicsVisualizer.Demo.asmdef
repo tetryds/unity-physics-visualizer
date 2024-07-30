@@ -1,0 +1,16 @@
+{
+    "name": "PhysicsVisualizer.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c3e6fce662a65684793f70c14c29717c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

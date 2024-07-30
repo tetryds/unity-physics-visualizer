@@ -5,8 +5,10 @@ using UnityEngine;
 namespace PhysicsVisualizer.Demo
 {
     [ExecuteAlways]
-    public class RaycastDemo : MonoBehaviour
+    public class SphereCastDemo : MonoBehaviour
     {
+        [SerializeField] float radius;
+        [SerializeField] float maxDistance;
         [SerializeField] LayerMask layers;
 
         void Update()
@@ -27,8 +29,8 @@ namespace PhysicsVisualizer.Demo
         private void CastRayWithDebug()
         {
             var ray = new Ray(transform.position, transform.forward);
-            Physics.Raycast(ray, out RaycastHit hitInfo, 3f, layers);
-            PhysicsVisualizer.Raycast(ray, hitInfo, 3f);
+            Physics.SphereCast(ray, radius, out RaycastHit hitInfo, maxDistance, layers);
+            PhysicsVisualizer.SphereCast(ray, radius, hitInfo, 3f);
         }
     }
 }

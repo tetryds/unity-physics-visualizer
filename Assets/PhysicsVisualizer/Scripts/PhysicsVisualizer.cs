@@ -13,7 +13,7 @@ namespace PhysicsVisualizer
                 GizmosScheduler.Instance.ScheduleDraw(() =>
                 {
                     Gizmos.color = Color.cyan;
-                    Gizmos.DrawWireSphere(hit.point, 0.05f);
+                    ExtraGizmos.DrawSphere(hit.point, hit.normal, 0.05f);
                     Gizmos.DrawRay(hit.point, hit.normal * 0.1f);
                     Gizmos.DrawRay(ray.origin, ray.direction * hit.distance);
                 });
@@ -35,7 +35,6 @@ namespace PhysicsVisualizer
                 GizmosScheduler.Instance.ScheduleDraw((Action)(() =>
                 {
                     Vector3 center = ray.origin + ray.direction * hit.distance;
-
                     Gizmos.color = Color.green;
                     ExtraGizmos.DrawSphere(hit.point, hit.normal, 0.05f);
                     Gizmos.DrawRay(hit.point, hit.normal * 0.1f);

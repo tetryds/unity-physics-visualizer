@@ -32,24 +32,22 @@ namespace PhysicsVisualizer
         {
             if (hit.collider)
             {
-                GizmosScheduler.Instance.ScheduleDraw(() =>
+                GizmosScheduler.Instance.ScheduleDraw((Action)(() =>
                 {
                     Vector3 center = ray.origin + ray.direction * hit.distance;
 
                     Gizmos.color = Color.green;
-                    Gizmos.DrawWireSphere(hit.point, 0.05f);
-                    //Gizmos.DrawRay(hit.point, hit.normal * 0.1f);
-                    Gizmos.DrawLine(center, hit.point);
-                    Gizmos.DrawWireSphere(center, radius);
-                    Gizmos.DrawRay(ray.origin, ray.direction * hit.distance);
-                });
+                    ExtraGizmos.DrawSphere(hit.point, hit.normal, 0.05f);
+                    Gizmos.DrawRay(hit.point, hit.normal * 0.1f);
+                    ExtraGizmos.DrawCapsule(ray.origin, ray.direction, radius, hit.distance);
+                }));
             }
             else
             {
                 GizmosScheduler.Instance.ScheduleDraw(() =>
                 {
                     Gizmos.color = Color.red;
-                    Gizmos.DrawRay(ray.origin, ray.direction * maxDistance);
+                    ExtraGizmos.DrawCapsule(ray.origin, ray.direction, radius, maxDistance);
                 });
             }
         }

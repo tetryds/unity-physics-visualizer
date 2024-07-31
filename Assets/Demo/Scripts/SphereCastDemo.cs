@@ -30,7 +30,7 @@ namespace PhysicsVisualizer.Demo
         {
             var ray = new Ray(transform.position, transform.forward);
             Physics.SphereCast(ray, radius, out RaycastHit hitInfo, maxDistance, layers);
-            PhysicsVisualizer.SphereCast(ray, radius, hitInfo, 3f);
+            PhysicsVisualizer.SphereCast(ray, radius, hitInfo, maxDistance);
         }
     }
 }

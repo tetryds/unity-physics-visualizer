@@ -7,6 +7,7 @@ namespace PhysicsVisualizer.Demo
     [ExecuteAlways]
     public class RaycastDemo : MonoBehaviour
     {
+        [SerializeField] float maxDistance;
         [SerializeField] LayerMask layers;
 
         void Update()
@@ -27,8 +28,8 @@ namespace PhysicsVisualizer.Demo
         private void CastRayWithDebug()
         {
             var ray = new Ray(transform.position, transform.forward);
-            Physics.Raycast(ray, out RaycastHit hitInfo, 3f, layers);
-            PhysicsVisualizer.Raycast(ray, hitInfo, 3f);
+            Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance, layers);
+            PhysicsVisualizer.Raycast(ray, hitInfo, maxDistance);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace PhysicsVisualizer
 
             if (parts.HasFlag(ConePart.Shell))
             {
-                int stepCount = STEPS * 2;
+                int stepCount = STEPS;
                 float stepAngle = 360f / stepCount;
                 var step = Quaternion.AngleAxis(stepAngle, dir);
 
@@ -63,6 +63,30 @@ namespace PhysicsVisualizer
                 Vector3 next = step * previous;
                 Gizmos.DrawLine(previous + pos, next + pos);
                 previous = next;
+            }
+        }
+
+        public static void DrawArcHalf(Vector3 pos, Vector3 dir, Vector3 normal, float radius, float angle)
+        {
+            var dirRot = Quaternion.LookRotation(dir, normal);
+            var sideRight = Quaternion.AngleAxis(angle, normal);
+            var sideLeft = Quaternion.AngleAxis(-angle, normal);
+
+            //int stepCount = Mathf.CeilToInt(angle / 5.625f);
+            int stepCount = 64;
+            float step = 1f / stepCount;
+
+            var startPoint = pos + dirRot * Vector3.forward * radius;
+
+            var currentPoint = startPoint;
+
+            for (int i = 0; i < stepCount + 1; i++)
+            {
+                var sideStep = Quaternion.Slerp(Quaternion.identity, sideRight, step * i);
+
+                var point = pos + sideStep * dirRot * Vector3.forward * radius;
+                Gizmos.DrawLine(currentPoint, point);
+                currentPoint = point;
             }
         }
 
@@ -151,12 +175,12 @@ namespace PhysicsVisualizer
             if (parts.HasFlag(SphereCapPart.Arches))
             {
                 var lookRot = Quaternion.LookRotation(dir);
-                int archSteps = STEPS / 2;
-                float angleStep = 180f / archSteps;
+                int archSteps = STEPS;
+                float angleStep = 360f / archSteps;
                 for (int i = 0; i < archSteps; i++)
                 {
                     var spinRot = Quaternion.AngleAxis(angleStep * i, Vector3.forward);
-                    DrawArc(pos, dir, lookRot * spinRot * Vector3.up, radius, angle);
+                    DrawArcHalf(pos, dir, lookRot * spinRot * Vector3.left, radius, angle);
                     //DrawArc(pos, dir, lookRot * spinRot *Vector3.right, radius, angle);
                 }
             }

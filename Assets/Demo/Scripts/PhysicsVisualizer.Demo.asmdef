@@ -2,7 +2,8 @@
     "name": "PhysicsVisualizer.Demo",
     "rootNamespace": "",
     "references": [
-        "GUID:c3e6fce662a65684793f70c14c29717c"
+        "GUID:c3e6fce662a65684793f70c14c29717c",
+        "GUID:687018b4d2945f2468ee68c4373c2b96"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -85,7 +85,8 @@ namespace PhysicsVisualizer
                 {
                     DrawHit(hit);
                     Gizmos.color = HitCastColor;
-                    ExtraGizmos.DrawCapsule(ray.origin, ray.direction, radius, hit.distance);
+                    ExtraGizmos.DrawSphere(ray.origin + ray.direction * hit.distance, ray.direction, radius);
+                    ExtraGizmos.DrawCylinder(ray.origin, ray.direction, radius, hit.distance, ExtraGizmos.CylinderPart.Shell);
                     DrawDirArrow(ray);
                     if (UseSourceObject)
                     {
@@ -99,7 +100,8 @@ namespace PhysicsVisualizer
                 GizmosScheduler.Instance.ScheduleDraw(() =>
                 {
                     Gizmos.color = NoHitCastColor;
-                    ExtraGizmos.DrawCapsule(ray.origin, ray.direction, radius, maxDistance);
+                    ExtraGizmos.DrawSphere(ray.origin + ray.direction * maxDistance, ray.direction, radius);
+                    ExtraGizmos.DrawCylinder(ray.origin, ray.direction, radius, maxDistance, ExtraGizmos.CylinderPart.Shell);
                     DrawDirArrow(ray);
                     if (UseSourceObject)
                     {
@@ -120,11 +122,12 @@ namespace PhysicsVisualizer
                     var hit = hits[i];
                     DrawHit(hit);
                     Gizmos.color = HitCastColor;
-                    ExtraGizmos.DrawSphereCap(ray.origin + ray.direction * hit.distance, ray.direction, radius, 90f, ExtraGizmos.SphereCapPart.Arches | ExtraGizmos.SphereCapPart.Circles);
+                    ExtraGizmos.DrawSphere(ray.origin + ray.direction * hit.distance, ray.direction, radius);
                 }
 
                 Gizmos.color = AllCastColor;
-                ExtraGizmos.DrawCapsule(ray.origin, ray.direction, radius, maxDistance);
+                ExtraGizmos.DrawSphere(ray.origin + ray.direction * maxDistance, ray.direction, radius);
+                ExtraGizmos.DrawCylinder(ray.origin, ray.direction, radius, maxDistance, ExtraGizmos.CylinderPart.Shell);
                 DrawDirArrow(ray);
                 if (UseSourceObject)
                 {

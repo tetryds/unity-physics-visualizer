@@ -10,16 +10,16 @@ namespace PhysicsVisualizer.Demo
         [SerializeField] float maxDistance;
         [SerializeField] LayerMask layers;
 
-        [SerializeField] Transform pivot1;
-        [SerializeField] Transform pivot2;
+        [SerializeField] Transform pivot;
 
         private void OnDrawGizmos()
         {
-            if (pivot1 == null || pivot2 == null) return;
-            Gizmos.DrawIcon(Vector3.Lerp(pivot1.position, pivot2.position, 0.5f), "laser", false);
-
-            Physics.CapsuleCast(pivot1.position, pivot2.position, radius, transform.forward, out RaycastHit hitInfo, maxDistance, layers);
-            PhysicsVisualizer.CapsuleCast(pivot1.position, pivot2.position, transform.forward, radius, hitInfo, maxDistance);
+            if (pivot == null) return;
+            Gizmos.DrawIcon(transform.position, "laser", false);
+            Vector3 pos1 = pivot.position - pivot.up * pivot.localScale.y;
+            Vector3 pos2 = pivot.position + pivot.up * pivot.localScale.y;
+            Physics.CapsuleCast(pos1, pos2, radius, transform.forward, out RaycastHit hitInfo, maxDistance, layers);
+            PhysicsVisualizer.CapsuleCast(pos1, pos2, transform.forward, radius, hitInfo, maxDistance);
         }
     }
 }

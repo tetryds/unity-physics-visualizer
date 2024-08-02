@@ -4,18 +4,20 @@ using UnityEngine;
 
 namespace PhysicsVisualizer.Demo
 {
-    public class SphereCastDemo : MonoBehaviour
+    public class BoxCastDemo : MonoBehaviour
     {
-        [SerializeField] float radius;
+        [SerializeField] Transform pivot;
         [SerializeField] float maxDistance;
         [SerializeField] LayerMask layers;
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawIcon(transform.position, "laser", false);
+            if (pivot == null) return;
+
             var ray = new Ray(transform.position, transform.forward);
-            Physics.SphereCast(ray, radius, out RaycastHit hitInfo, maxDistance, layers);
-            PhysicsVisualizer.SphereCast(ray, radius, hitInfo, maxDistance);
+            Physics.BoxCast(transform.position, pivot.localScale, transform.forward, out RaycastHit hitInfo, pivot.rotation, maxDistance, layers);
+            PhysicsVisualizer.BoxCast(ray, pivot.localScale, pivot.rotation, hitInfo, maxDistance);
         }
     }
 }

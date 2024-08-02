@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace PhysicsVisualizer.Demo
 {
-    public class SphereCastDemo : MonoBehaviour
+    public class RaycastAllDemo : MonoBehaviour
     {
-        [SerializeField] float radius;
         [SerializeField] float maxDistance;
         [SerializeField] LayerMask layers;
 
@@ -14,8 +13,9 @@ namespace PhysicsVisualizer.Demo
         {
             Gizmos.DrawIcon(transform.position, "laser", false);
             var ray = new Ray(transform.position, transform.forward);
-            Physics.SphereCast(ray, radius, out RaycastHit hitInfo, maxDistance, layers);
-            PhysicsVisualizer.SphereCast(ray, radius, hitInfo, maxDistance);
+            var hits = Physics.RaycastAll(ray, maxDistance, layers);
+            PhysicsVisualizer.RaycastAll(ray, hits, hits.Length, maxDistance);
         }
+
     }
 }

@@ -29,7 +29,8 @@ namespace PhysicsVisualizer
                 }
             }
 
-            DontDestroyOnLoad(instance);
+            if (Application.isPlaying)
+                DontDestroyOnLoad(instance);
         }
 
         private static T GetInstance()

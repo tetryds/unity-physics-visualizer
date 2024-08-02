@@ -272,9 +272,9 @@ namespace PhysicsVisualizer
                     ExtraGizmos.DrawCapsule2(pos1 + hitTranslation, pos2 + hitTranslation, radius);
                 }
 
+                Gizmos.color = AllCastColor;
                 ExtraGizmos.DrawCapsuleHull(pos1, pos2, radius, dir, maxDistance, ExtraGizmos.CapsuleHullPart.Links);
 
-                Gizmos.color = AllCastColor;
                 Vector3 translation = dir * maxDistance;
 
                 ExtraGizmos.DrawCapsule2(pos1 + translation, pos2 + translation, radius);
